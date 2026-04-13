@@ -84,7 +84,7 @@ WHERE AnnualSales >=800000 AND YearOpened <2001
 
 SELECT ProductLine FROM DimReseller
 WHERE ProductLine LIKE 'HL%'
-K
+
 
 
 SELECT * FROM DimProduct
