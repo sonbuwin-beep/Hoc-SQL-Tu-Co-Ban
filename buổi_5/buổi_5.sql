@@ -68,14 +68,24 @@ GROUP BY
 
 
 --Bài tập 4: Tổng doanh số theo nhân viên và theo năm
+WITH TotalSalesByYearAndEmployee AS (
+	SELECT 
+		EmployeeKey,
+		YEAR(OrderDate) AS Year,
+		SUM(SalesAmount) AS TotalSales
+	FROM FactResellerSales
+	GROUP BY EmployeeKey, YEAR(OrderDate)
+)
 SELECT 
-	A.LastName,SUM(B.SalesAmount) ,YEAR(B.DueDate) AS YEAR
-FROM 
-	DimEmployee AS A INNER JOIN  FactResellerSales AS B 
-ON A.EmployeeKey=B.EmployeeKey
-GROUP BY 
-	A.LastName,YEAR(B.DueDate)
-
+	TSYE.EmployeeKey,
+	LastName,
+	MiddleName,
+	FirstName,
+	Year,
+	TotalSales
+FROM TotalSalesByYearAndEmployee AS TSYE
+LEFT JOIN DimEmployee AS DE
+ON TSYE.EmployeeKey = DE.EmployeeKey
 
 --Toán tử logic - Xử lý giá trị NULL
 --Bài tập 1: Lọc tất cả các sản phẩm có số Size
@@ -86,7 +96,7 @@ FROM
 WHERE Size IS NOT NULL
 
 
---ài tập 2: Lọc ra tất cả các sản phẩm có màu sắc
+--Bài tập 2: Lọc ra tất cả các sản phẩm có màu sắc
 
 SELECT 
 	ProductAlternateKey,Color
@@ -133,6 +143,12 @@ ON
 WHERE YEAR(OrderDate) IN (2012) AND MONTH(OrderDate) IN (5)
 
 
+-- VÍ DỤ THÊM : TÍNH TOÁN LEADTIME DỰ KIẾM CỦA ORDERLINE TRONG BẢNG FactInternetSales
+SELECT 
+	DATEDIFF(DAY, OrderDate, ShipDate) AS TT1
+FROM 
+	FactInternetSales
+
 ---Toán tử logic - LIKE statement
 --Bài tập 1: Trả về khách hàng có địa chỉ email bắt đầu bằng chữ s, theo sau 
 --là 4 ký tự bất kỳ, và nối tiếp là ký tự “on”
@@ -161,7 +177,7 @@ INNER JOIN DimProduct AS B
 ON 
 	A.ProductKey=B.ProductKey
 WHERE 
-	B.ProductAlternateKey LIKE 'LJ%'
+	B.ProductAlternateKey LIKE 'LJ%' AND A.EnglishProductName LIKE '%LONG-SLEEVE LOGO%'
 
 
 --Các hàm xử lý chuỗI
