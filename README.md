@@ -30,7 +30,7 @@ Nâng cấp kỹ năng xử lý dữ liệu cơ bản:
 
 #### **Buổi 5: Các câu lệnh truy vấn dữ liệu với SQL (Phần 2)  **
 * **ĐÃ CÓ FIDE LÍ THUYẾT**
-* **FIDE BÀI TẬP ĐANG CẬP NHẬT HẸ HẸ ....**
+* **FIDE BÀI TẬP **
 ### 🛠 CÔNG CỤ HỖ TRỢ
 * **Phần mềm:** SQL Server Management Studio (SSMS).
 
