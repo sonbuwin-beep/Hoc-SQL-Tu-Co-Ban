@@ -1,6 +1,7 @@
 ﻿USE [AdventureWorksDW2022]
 GO 
 
+     
 --[Bài tập] Các câu lệnh truy vấn dữ liệu với SQL (Phần 2)
 --Bài tập 1:
 --Tính tổng doanh thu hàng năm (AnnualRevenue) theo từng loại hình kinh doanh
